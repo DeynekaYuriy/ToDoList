@@ -1,0 +1,117 @@
+﻿@model IndexViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TODO</title>
+    <link rel="stylesheet" type="text/css" href="~/css/IndexStyle.css" />
+</head>
+<body>
+    <div class="content">
+        <div class="categories">
+
+            <ul>
+                <li>
+                    <a href="@Url.Action("Index", "Home")"
+                    class="all-categories @(Model.SelectedCategory==null ? "selected-category" : "")">
+                        <span class="category-name">All Items</span><span class="count">
+                            @Model.ItemsRepository.GetItemsCount()
+                        </span>
+                    </a>
+                </li>
+                @foreach (var category in Model.Categories)
+                {
+                    <li>
+                        <a href="@Url.Action("Category", "Home", new { categoryId = category.Id })"
+                       class="@(Model.SelectedCategory?.Id==@category.Id ? "selected-category" : "")">
+                            <span class="category-name">@category.Name</span><span class="count">
+                                @Model.ItemsRepository.GetItemsCountWithCategory(category.Id)
+                            </span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="items">
+            <div class="create-item">
+                <span>Add Task:</span>
+                <form method="post" asp-action="AddTask">
+                    <input type="text" name="text" placeholder="Task text" autocomplete="off" required/>
+                    <select class="category-select" name="categoryId">
+                        <option value="">No category</option>
+                        @foreach (var category in Model.Categories)
+                        {
+                            <option value="@category.Id">@category.Name</option>
+                        }
+                    </select>
+                    <input type="datetime-local" name="deadline" />
+                    <input type="submit" class="add-item" value="Add">
+                </form>
+            </div>
+            <span class="active-title">Active:</span>
+            <div class="items-section">
+                @foreach (var item in Model.Active)
+                {
+                    <div class="item">
+                        <div class="text">@item.Text</div>
+                        <div class="options">
+                            @if (item.CategoryId != null)
+                            {
+                                <div class="category">
+                                    @Model.CategoryRepository.GetCategoryById(@item.CategoryId)?.Name
+                                </div>
+                            }
+                            @if (item.Deadline != null)
+                            {
+                                <div class="deadline">@item.Deadline</div>
+
+                            }
+                        </div>
+                        <div class="item-controls">
+                            <form method="post" asp-action="EditTask" asp-route-item="@item">
+                                <input type="hidden" name="itemId" value=@item.Id>
+                                <input type="submit" class="edit-item" value="Edit">
+                            </form>
+                            <form method="post" asp-action="DeleteTask" asp-route-item="@item">
+                                <input type="hidden" name="itemId" value=@item.Id>
+                                <input type="submit" class="delete-item" value="Delete">
+                            </form>
+
+                        </div>
+                    </div>
+                }
+            </div>
+            <span class="completed-title">Completed:</span>
+            <div class="items-section">
+                @foreach (var item in Model.Completed)
+                {
+                    <div class="item">
+                        <div class="text">@item.Text</div>
+                        @if (item.CategoryId != null)
+                        {
+                            <div class="category">
+                                @Model.CategoryRepository.GetCategoryById(@item.CategoryId)?.Name
+                            </div>
+                        }
+                        @if (item.Deadline != null)
+                        {
+                            <div class="deadline">@item.Deadline</div>
+
+                        }
+                        <div class="item-controls">
+                            <form method="post" asp-action="EditTask" asp-route-item="@item">
+                                <input type="hidden" name="itemId" value=@item.Id>
+                                <input type="submit" class="edit-item" value="Edit">
+                            </form>
+                            <form method="post" asp-action="DeleteTask" asp-route-item="@item">
+                                <input type="hidden" name="itemId" value=@item.Id>
+                                <input type="submit" class="delete-item" value="Delete">
+                            </form>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

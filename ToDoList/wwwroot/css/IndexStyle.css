@@ -1,0 +1,214 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+body {
+    vertical-align: top;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+
+* {
+    font-family: "Poppins",sans-serif;
+    font-weight: 400;
+}
+
+.content {
+    display: flex;
+}
+
+.categories {
+    padding: 0 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    height: 100vh;
+}
+
+    .categories ul {
+        list-style-type: none;
+    }
+
+        .categories ul li {
+            width: 200px;
+            margin-bottom: 5px;
+        }
+
+
+    .categories a {
+        text-decoration: none;
+        color: black;
+        transition: .2s;
+        font-size: 18px;
+    }
+
+        .categories a .category-name {
+            width: 170px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            display: inline-block;
+            text-align: left;
+            transition: .2s;
+        }
+
+        .categories a .count {
+            float: right;
+            color: #808080;
+            overflow: hidden;
+            display: inline-block;
+            text-align: right;
+        }
+
+    .categories li:hover .category-name {
+        color: #808080;
+    }
+
+.selected-category * {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.items {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+    .items .create-item {
+        width: 100%;
+    }
+
+        .items .create-item > span {
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 24px;
+            display: inline-block;
+        }
+
+        .items .create-item form {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+
+            .items .create-item form input, .items .create-item form select {
+                padding: 10px;
+                width: 200px;
+                font-size: 18px;
+                background-color: white;
+                border: 1px solid black;
+            }
+
+                .items .create-item form input[type="datetime-local"] {
+                    padding: 9px;
+                }
+
+                .items .create-item form input[type="submit"] {
+                    padding: 10px 30px;
+                    cursor: pointer;
+                }
+
+                .items .create-item form input[type="text"] {
+                    width:45%;
+                }
+
+form input[type="submit"] {
+    transition: .2s;
+}
+
+    form input[type="submit"]:hover {
+        color: white;
+        background-color: black;
+    }
+
+
+
+
+.items-section {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 50px;
+}
+
+.items > span {
+    margin: 20px 0;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.item {
+    width: 250px;
+    padding: 20px;
+    box-shadow: 0px 0px 5px #c4c4c4;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+    .item .text {
+        font-size: 20px;
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        margin-bottom: auto;
+    }
+
+    .item .options {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .item .category, .item .deadline {
+        padding: 3px 10px;
+        border-radius: 50px;
+        font-size: 14px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 150px;
+    }
+
+    .item .category {
+        background-color: #dedede;
+    }
+
+    .item .deadline {
+        background: #db404a;
+        color: white;
+    }
+
+    .item .item-controls {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 10px;
+    }
+
+        .item .item-controls form {
+        }
+
+.item-controls input {
+    border-radius: 0px;
+    border: none;
+    padding: 5px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+}
